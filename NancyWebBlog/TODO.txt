@@ -1,0 +1,4 @@
+﻿1) Casset refference
+2) View for single posts
+3) Posts list
+4) Githubs
