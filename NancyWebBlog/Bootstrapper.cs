@@ -15,7 +15,7 @@ namespace NancyWebBlog
         {
             base.ApplicationStartup(container, pipelines);
             Elmahlogging.Enable(pipelines, "elmah");
-            Cassette.Nancy.CassetteNancyStartup.OptimizeOutput = true;
+            Cassette.Nancy.CassetteNancyStartup.OptimizeOutput = false;
         }
     }
 }
