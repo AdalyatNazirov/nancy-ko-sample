@@ -14,7 +14,7 @@ namespace NancyWebBlog.Modules
         {
             Get["/"] = _ =>
             {
-                return View["index"];
+                return View["Default/index"];
             };
         }
     }

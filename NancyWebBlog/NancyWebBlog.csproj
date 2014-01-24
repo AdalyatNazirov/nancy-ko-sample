@@ -85,11 +85,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bundle.txt" />
     <Content Include="Content\blog-post.css" />
-    <Content Include="Content\Bundle.txt" />
     <Content Include="Content\main.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <None Include="Content\bootstrap-theme.css.old" />
+    <None Include="Content\bootstrap-theme.min.css.old" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -104,7 +104,7 @@
     <Content Include="Scripts\knockout\knockout.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.js" />
-    <None Include="Views\index.cshtml" />
+    <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -116,7 +116,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\post.cshtml" />
+    <Content Include="Views\Default\post.cshtml" />
+    <Content Include="Views\Partials\footer.cshtml" />
+    <Content Include="Views\Partials\navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />

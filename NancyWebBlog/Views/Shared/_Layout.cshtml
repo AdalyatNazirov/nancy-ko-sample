@@ -17,33 +17,7 @@
     @Bundles.RenderScripts()
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#index">Start Bootstrap</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#about">About</a>
-                    </li>
-                    <li><a href="#services">Services</a>
-                    </li>
-                    <li><a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    @Html.Partial("Views/Partials/navbar.cshtml")
     <div class="container">
         <div class="row">
             @RenderBody()
@@ -95,14 +69,7 @@
             </div>
         </div>
         <hr />
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright &copy; Company 2014</p>
-                </div>
-            </div>
-        </footer>
+        @Html.Partial("Views/Partials/footer.cshtml")
     </div>
     <!-- /.container -->
 </body>
