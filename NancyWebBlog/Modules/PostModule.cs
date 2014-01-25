@@ -17,6 +17,14 @@ namespace NancyWebBlog.Modules
                 UnitOfWork unitOfWork = new UnitOfWork();
                 return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get().First());
             };
+
+            Get["/all"] = SendAllPosts;
+        }
+
+        private Response SendAllPosts(dynamic parameters)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get());
         }
     }
 }
