@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<NancyWebBlog.Model.Post>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
 @{
     Layout = "Views/Shared/_Layout.cshtml";
 }
@@ -7,11 +7,10 @@
 }
 <div class="col-lg-8">
     <!-- the actual blog post: title/author/date/content -->
-    
     <h1>
         A Simple Blog Template for Bootstrap 3</h1>
     <p class="lead">
-        by <a href="@ResolveUrl("/about")")">@Html.Model.Author</a>
+        by <a href="@ResolveUrl("/about")")"> Author</a>
     </p>
     <hr>
     <p>

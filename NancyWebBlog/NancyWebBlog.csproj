@@ -39,7 +39,7 @@
     <Reference Include="Cassette">
       <HintPath>..\packages\Cassette.2.4.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Nancy">
+    <Reference Include="Cassette.Nancy, Version=2.1.1.28682, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Cassette.Nancy.2.1.1\lib\net40\Cassette.Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Elmah">
@@ -104,7 +104,7 @@
     <Content Include="Scripts\knockout\knockout.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.js" />
-    <Content Include="Views\Default\contact.cshtml" />
+    <Content Include="Views\Default\about.cshtml" />
     <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config">
@@ -116,8 +116,8 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Default\post.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Default\blog.cshtml" />
     <Content Include="Views\Partials\footer.cshtml" />
     <Content Include="Views\Partials\navbar.cshtml" />
     <Content Include="Views\Partials\Side\search.cshtml" />
@@ -127,7 +127,6 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CassetteConfiguration.cs" />
-    <Compile Include="Modules\AboutModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

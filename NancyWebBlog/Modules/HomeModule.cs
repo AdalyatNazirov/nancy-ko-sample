@@ -10,12 +10,14 @@ namespace NancyWebBlog.Modules
 {
     public class HomeModule : NancyModule
     {
-        public HomeModule():base("/")
+        public HomeModule()
+            : base("/")
         {
-            Get["/"] = _ =>
-            {
-                return View["Default/index"];
-            };
+            Get["/"] = _ => View["Default/index"];
+
+            Get["/about"] = _ => View["Default/about"];
+
+            Get["/blog"] = _ => View["Default/blog"];
         }
     }
 }
