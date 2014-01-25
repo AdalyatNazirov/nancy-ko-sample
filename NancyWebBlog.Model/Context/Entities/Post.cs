@@ -18,5 +18,7 @@ namespace NancyWebBlog.Model
         public DateTime PostedAt { get; set; }
         
         public string Author { get; set; }
+
+        public string LogoUrl { get; set; }
     }
 }

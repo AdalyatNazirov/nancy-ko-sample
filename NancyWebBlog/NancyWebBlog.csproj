@@ -99,9 +99,9 @@
     <Content Include="Scripts\jquery\jquery-2.0.3-vsdoc.js" />
     <Content Include="Scripts\jquery\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\knockout\knockout-3.0.0.debug.js" />
+    <Content Include="Scripts\knockout\knockout-3.0.0.js" />
     <Content Include="Scripts\knockout\bundle.txt" />
-    <Content Include="Scripts\knockout\knockout.debug.js" />
-    <Content Include="Scripts\knockout\knockout.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.js" />
     <Content Include="Views\Default\about.cshtml" />
@@ -116,6 +116,8 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Views\Partials\Comment\commentForm.cshtml" />
+    <Content Include="Views\Partials\Comment\comments.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Default\blog.cshtml" />
     <Content Include="Views\Partials\footer.cshtml" />

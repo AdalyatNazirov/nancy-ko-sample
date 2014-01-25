@@ -17,11 +17,11 @@
     @Bundles.RenderScripts()
 </head>
 <body>
+    @RenderSection("Scripts", required: false)
     @Html.Partial("Views/Partials/navbar.cshtml")
     <div class="container">
         <div class="row">
             @RenderBody()
-            
         </div>
         <hr />
         @Html.Partial("Views/Partials/footer.cshtml")
