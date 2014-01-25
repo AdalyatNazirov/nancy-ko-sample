@@ -1,0 +1,12 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@*it is important to delete first slash in path*@
+@{
+  Layout = "Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.title = "About";
+}
+
+<h1>Hi, I'm Adel!</h1>

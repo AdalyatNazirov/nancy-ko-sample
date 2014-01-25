@@ -13,6 +13,7 @@ namespace NancyWebBlog.Model
             Post newPost = new Post()
             {
                 Author = "Adel",
+                Title = "Congratulation!",
                 Body = "This is my first post!",
                 PreBody = "First post",
                 PostedAt = DateTime.Now

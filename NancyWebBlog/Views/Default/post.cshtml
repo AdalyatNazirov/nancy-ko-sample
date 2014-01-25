@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<NancyWebBlog.Model.Post>
 @{
     Layout = "Views/Shared/_Layout.cshtml";
 }
@@ -7,17 +7,18 @@
 }
 <div class="col-lg-8">
     <!-- the actual blog post: title/author/date/content -->
+    
     <h1>
         A Simple Blog Template for Bootstrap 3</h1>
     <p class="lead">
-        by <a href="index.php">Start Bootstrap</a>
+        by <a href="@ResolveUrl("/about")")">@Html.Model.Author</a>
     </p>
     <hr>
     <p>
         <span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00
         PM</p>
     <hr>
-    <img src="http://placehold.it/900x300" class="img-responsive">
+    <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
     <hr>
     <p class="lead">
         Science cuts two ways, of course; its products can be used for both good and evil.
@@ -80,4 +81,12 @@
         Don't listen to this guy, any blog with the categories 'dinosaurs, spaceships, fried
         foods, wild animals, alien abductions, business casual, robots, and fireworks' has
         true potential.</p>
+</div>
+<div class="col-lg-4">
+    @Html.Partial("Views/Partials/Side/search.cshtml")
+    <!-- /well -->
+    @Html.Partial("Views/Partials/Side/category.cshtml")
+    <!-- /well -->
+    @Html.Partial("Views/Partials/Side/popular.cshtml")
+    <!-- /well -->
 </div>

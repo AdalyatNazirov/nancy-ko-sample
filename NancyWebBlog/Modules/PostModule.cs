@@ -16,7 +16,7 @@ namespace NancyWebBlog.Modules
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
                 //return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get().First());
-                return View["Default/post"];
+                return View["Default/post", unitOfWork.PostRepository.Get().First()];
             };
         }
     }

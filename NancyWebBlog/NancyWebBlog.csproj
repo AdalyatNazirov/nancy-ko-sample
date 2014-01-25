@@ -88,8 +88,8 @@
     <Content Include="Content\bundle.txt" />
     <Content Include="Content\blog-post.css" />
     <Content Include="Content\main.css" />
-    <None Include="Content\bootstrap-theme.css.old" />
-    <None Include="Content\bootstrap-theme.min.css.old" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -104,6 +104,7 @@
     <Content Include="Scripts\knockout\knockout.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.js" />
+    <Content Include="Views\Default\contact.cshtml" />
     <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config">
@@ -119,10 +120,14 @@
     <Content Include="Views\Default\post.cshtml" />
     <Content Include="Views\Partials\footer.cshtml" />
     <Content Include="Views\Partials\navbar.cshtml" />
+    <Content Include="Views\Partials\Side\search.cshtml" />
+    <Content Include="Views\Partials\Side\category.cshtml" />
+    <Content Include="Views\Partials\Side\popular.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Modules\AboutModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
