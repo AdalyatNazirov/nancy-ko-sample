@@ -5,12 +5,14 @@ using System.Web;
 using Nancy;
 using NancyWebBlog.Repository;
 using Newtonsoft.Json;
+using NancyWebBlog.Models;
 
 namespace NancyWebBlog.Modules
 {
     public class PostModule : NancyModule
     {
-        public PostModule():base("/post")
+        public PostModule()
+            : base("/post")
         {
             Get["/"] = _ =>
             {
@@ -18,13 +20,16 @@ namespace NancyWebBlog.Modules
                 return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get().First());
             };
 
-            Get["/all"] = SendAllPosts;
+            Get["/all"] = SendAllPostPreviews;
         }
 
-        private Response SendAllPosts(dynamic parameters)
+        private Response SendAllPostPreviews(dynamic parameters)
         {
             UnitOfWork unitOfWork = new UnitOfWork();
-            return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get());
+            var previews = unitOfWork.PostRepository.Get()
+                .Select(post =>
+                    new PostPreviewModel(post));
+            return JsonConvert.SerializeObject(previews);
         }
     }
 }

@@ -13,18 +13,20 @@ namespace NancyWebBlog.Model
         {
             Database.SetInitializer<BlogContext>(new DefaultDataContextInitializer());
         }
-        public BlogContext() : base("Name=BlogContext")
+
+        public BlogContext()
+            : base("Name=BlogContext")
         {
-            
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        
+
     }
 }

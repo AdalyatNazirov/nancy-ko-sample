@@ -104,6 +104,10 @@
     <Content Include="Scripts\knockout\bundle.txt" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout\knockout.mapping-latest.js" />
+    <Content Include="Scripts\viewModel\bundle.txt" />
+    <Content Include="Scripts\viewModel\CommentModel.js" />
+    <Content Include="Scripts\viewModel\PostPreviewModel.js" />
+    <Content Include="Scripts\viewModel\PostModel.js" />
     <Content Include="Views\Default\about.cshtml" />
     <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
@@ -129,6 +133,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Models\PostPreviewModel.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

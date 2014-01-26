@@ -17,9 +17,15 @@ namespace NancyWebBlog.Model
                 Body = "This is my first post!",
                 PreBody = "First post",
                 PostedAt = DateTime.Now,
-                LogoUrl=""
+                LogoUrl = "",
+                Comments = new List<Comment>() { 
+                    new Comment(){ Author="Andrew", PostedAt = DateTime.Now, Text="nice job"},
+                    new Comment(){ Author="Rob", PostedAt = DateTime.Now, Text="very cool"},
+                }
             };
             context.Posts.Add(newPost);
+            context.Comments.AddRange(newPost.Comments);
+
             newPost = new Post()
             {
                 Author = "Adel",
@@ -27,10 +33,15 @@ namespace NancyWebBlog.Model
                 Body = "This is my second post!",
                 PreBody = "Second post",
                 PostedAt = DateTime.Now,
-                LogoUrl = ""
+                LogoUrl = "",
+                Comments = new List<Comment>() { 
+                    new Comment(){ Author = "Bob",
+                                    PostedAt = DateTime.Now,
+                                    Text = "good post"}
+                }
             };
             context.Posts.Add(newPost);
-
+            context.Comments.AddRange(newPost.Comments);
             context.SaveChanges();
         }
     }

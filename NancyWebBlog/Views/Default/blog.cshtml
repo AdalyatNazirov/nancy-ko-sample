@@ -2,34 +2,27 @@
 @{
     Layout = "Views/Shared/_Layout.cshtml";
 }
+@using Cassette.Nancy
+@{
+    Bundles.Reference("Scripts/viewModel");
+}
 @{
     ViewBag.title = "Blog Post Template for Bootstrap 3";
 }
 @section Scripts{
     <script type="text/javascript">
         $(function () {
-            var viewModel = new PostsViewModel();
+            var viewModel = new PreviewsViewModel();
             ko.applyBindings(viewModel);
         });
 
-        function PostModel(data, onRemoved) {
-            var self = this
-
-            self.title = data.Title;
-            self.id = data.ID;
-            self.author = data.Author;
-            self.postedAt = new Date(Date.parse(data.PostedAt));
-            self.preBody = data.PreBody;
-            self.body = data.Body;
-        }
-
-        function PostsViewModel() {
+        function PreviewsViewModel() {
             var self = this;
 
             self.posts = ko.observableArray();
             $.getJSON("/post/all", function (response) {
                 var mapping = $.map(response, function (post) {
-                    return new PostModel(post, function () { });
+                    return new PreviewPostModel(post);
                 });
                 self.posts(mapping);
             });
@@ -56,8 +49,6 @@
     <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
     <hr>
     <p class="lead" data-bind="text: preBody">
-    </p>
-    <p data-bind="text: body">
     </p>
     @*<p>
         <strong>Placeholder text by:</strong>

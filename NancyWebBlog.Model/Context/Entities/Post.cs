@@ -20,5 +20,7 @@ namespace NancyWebBlog.Model
         public string Author { get; set; }
 
         public string LogoUrl { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -1,0 +1,7 @@
+﻿[assets]
+CommentModel.js
+*
+
+[references]
+~/scripts/jquery
+~/scripts/knockout

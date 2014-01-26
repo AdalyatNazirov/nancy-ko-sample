@@ -37,6 +37,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Context\BlogContext.cs" />
     <Compile Include="Context\DefaultDataContextInitializer.cs" />
+    <Compile Include="Context\Entities\Comment.cs" />
     <Compile Include="Context\Entities\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
