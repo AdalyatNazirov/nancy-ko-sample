@@ -1,4 +1,10 @@
 ﻿/*    Comment box   */
-textarea.comment {
-	resize:vertical;
+textarea.comment
+{
+    resize: vertical;
+}
+
+.titleCursor
+{
+    cursor: pointer;
 }

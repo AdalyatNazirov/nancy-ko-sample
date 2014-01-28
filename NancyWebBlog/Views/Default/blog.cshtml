@@ -5,6 +5,8 @@
 @using Cassette.Nancy
 @{
     Bundles.Reference("Scripts/viewModel");
+    Bundles.Reference("Scripts/sammy");
+    Bundles.Reference("Scripts/knockout");
 }
 @{
     ViewBag.title = "Blog Post Template for Bootstrap 3";
@@ -18,14 +20,31 @@
 
         function PreviewsViewModel() {
             var self = this;
+            var blogpath = window.location.pathname;
 
             self.posts = ko.observableArray();
-            $.getJSON("/post/all", function (response) {
-                var mapping = $.map(response, function (post) {
-                    return new PreviewPostModel(post);
+            self.goToPost = function (post) {
+                location.hash = "/" + post.id;
+            }
+
+            Sammy(function () {
+                this.get(blogpath, function () {
+                    $.getJSON("/post/all", function (response) {
+                        var mapping = $.map(response, function (post) {
+                            return new PreviewPostModel(post);
+                        });
+                        self.posts(mapping);
+                    });
                 });
-                self.posts(mapping);
-            });
+                this.get(blogpath + '#/all', function () {
+                    this.app.runRoute('get', 'blog')
+                });
+                this.get(blogpath + '#/:postId', function () {
+                    $.get("/post/" + this.params.postId, function (data) {
+                        var s = data;
+                    });
+                });
+            }).run();
 
             self.onPostRemoved = function (post) {
                 self.posts.remove(post);
@@ -34,8 +53,7 @@
     </script>
 }
 <div class="col-lg-8" data-bind="foreach: posts">
-    <!-- the actual blog post: title/author/date/content -->
-    <h1 data-bind="text: title">
+    <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost">
     </h1>
     <p class="lead">
         by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>

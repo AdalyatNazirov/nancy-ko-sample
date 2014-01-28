@@ -21,15 +21,30 @@ namespace NancyWebBlog.Modules
             };
 
             Get["/all"] = SendAllPostPreviews;
+
+            Get["/{id}"] = SendPostById;
         }
 
         private Response SendAllPostPreviews(dynamic parameters)
         {
-            UnitOfWork unitOfWork = new UnitOfWork();
-            var previews = unitOfWork.PostRepository.Get()
-                .Select(post =>
-                    new PostPreviewModel(post));
-            return JsonConvert.SerializeObject(previews);
+            using (var unitOfWork = new UnitOfWork())
+            {
+                var previews = unitOfWork.PostRepository.Get()
+                    .Select(post =>
+                        new PostPreviewModel(post));
+                return JsonConvert.SerializeObject(previews);
+            }
+        }
+
+        private Response SendPostById(dynamic parameters)
+        {        
+            using (var unitOfWork = new UnitOfWork())
+            {
+                int id = parameters.id;
+                var post = unitOfWork.PostRepository
+                    .GetByID(id);
+                return JsonConvert.SerializeObject(post);
+            }
         }
     }
 }
