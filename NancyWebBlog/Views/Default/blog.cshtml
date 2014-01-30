@@ -23,6 +23,8 @@
             var blogpath = window.location.pathname;
 
             self.posts = ko.observableArray();
+            self.isListVisible = ko.observable();
+            self.choosenPost = ko.observable();
             self.goToPost = function (post) {
                 location.hash = "/" + post.id;
             }
@@ -34,14 +36,17 @@
                             return new PreviewPostModel(post);
                         });
                         self.posts(mapping);
+                        self.isListVisible(true);
+                        self.choosenPost(null);
                     });
                 });
                 this.get(blogpath + '#/all', function () {
                     this.app.runRoute('get', 'blog')
                 });
                 this.get(blogpath + '#/:postId', function () {
-                    $.get("/post/" + this.params.postId, function (data) {
-                        var s = data;
+                    $.getJSON("/post/" + this.params.postId, function (data) {
+                        self.choosenPost(new PostModel(data));
+                        self.isListVisible(false);
                     });
                 });
             }).run();
@@ -52,23 +57,41 @@
         };
     </script>
 }
-<div class="col-lg-8" data-bind="foreach: posts">
-    <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost">
-    </h1>
-    <p class="lead">
-        by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
-    </p>
-    <hr>
-    <p>
-        <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
-        </span>
-    </p>
-    <hr>
-    <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
-    <hr>
-    <p class="lead" data-bind="text: preBody">
-    </p>
-    @*<p>
+<div class="col-lg-8">
+    <div data-bind="foreach: posts, visible: isListVisible">
+        <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost">
+        </h1>
+        <p class="lead">
+            by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
+        </p>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+            </span>
+        </p>
+        <hr>
+        <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+        <hr>
+        <p class="lead" data-bind="text: preBody">
+        </p>
+    </div>
+    <div data-bind="with: choosenPost">
+        <h1 class="titleCursor" data-bind="text: title">
+        </h1>
+        <p class="lead">
+            by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
+        </p>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+            </span>
+        </p>
+        <hr>
+        <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+        <hr>
+        <p data-bind="text: body">
+        </p>
+        @*<p>
         <strong>Placeholder text by:</strong>
     </p>
     <ul>
@@ -76,9 +99,10 @@
         <li><a href="http://cupcakeipsum.com/">Cupcake Ipsum</a> </li>
         <li><a href="http://tunaipsum.com/">Tuna Ipsum</a> </li>
     </ul>
-    <hr />
-    @Html.Partial("Views/Partials/Comment/commentForm")
-    @Html.Partial("Views/Partials/Comment/comments")*@
+    <hr />*@
+        @Html.Partial("Views/Partials/Comment/commentForm")
+        @Html.Partial("Views/Partials/Comment/comments")
+    </div>
 </div>
 <div class="col-lg-4">
     @Html.Partial("Views/Partials/Side/search")
