@@ -25,6 +25,10 @@ namespace NancyWebBlog.Model
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Comment>()
+                .HasRequired(c => c.Post)
+                .WithMany(c => c.Comments)
+                .WillCascadeOnDelete(true);
         }
 
 

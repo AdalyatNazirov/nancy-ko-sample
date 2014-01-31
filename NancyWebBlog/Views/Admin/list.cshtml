@@ -1,0 +1,65 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
+
+@{
+    Layout = "Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var viewModel = new PreviewsViewModel();
+            ko.applyBindings(viewModel);
+        });
+
+        function PreviewsViewModel() {
+            var self = this;
+            var blogpath = window.location.pathname;
+
+            self.posts = ko.observableArray();
+            self.goToPost = function (post) {
+                location.hash = "/" + post.id;
+            }
+
+            Sammy(function () {
+                this.get(blogpath, function () {
+                    $.getJSON("/post/all", function (response) {
+                        var mapping = $.map(response, function (post) {
+                            return new PreviewPostModel(post);
+                        });
+                        self.posts(mapping);
+                    });
+                });
+            }).run();
+        };
+    </script>
+}
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Posted At</th>
+                <th>Author</th>
+                <th>Pre body</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:posts">
+            <tr>
+                <td data-bind="text:id"></td>
+                <td data-bind="text:title"></td>
+                <td data-bind="text:postedAt.toLocaleString()"></td>
+                <td data-bind="text:author"></td>
+                <td data-bind="text:preBody"></td>
+                <td>
+                    <a href="#" ><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="#" ><i class="glyphicon glyphicon-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

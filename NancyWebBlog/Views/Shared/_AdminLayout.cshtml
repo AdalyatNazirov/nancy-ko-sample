@@ -2,9 +2,12 @@
 @using Cassette.Nancy
 @{
     Bundles.Reference("Content");
-    
+
     Bundles.Reference("Scripts/bootstrap");
     Bundles.Reference("Scripts/jquery");
+    Bundles.Reference("Scripts/knockout");
+    Bundles.Reference("Scripts/viewModel");
+    Bundles.Reference("Scripts/sammy");
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,14 +20,12 @@
 </head>
 <body>
     @RenderSection("Scripts", required: false)
-    @Html.Partial("Views/Partials/navbar.cshtml")
-    <div class="container">
+    <a href="/">Go to main site</a>
+    <div>
         <div class="row">
             @RenderBody()
         </div>
         <hr />
-        @Html.Partial("Views/Partials/footer.cshtml")
     </div>
-    <!-- /.container -->
 </body>
 </html>

@@ -20,6 +20,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,14 +97,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bundle.txt" />
     <Content Include="Content\blog-post.css" />
-    <Content Include="Content\main.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\bundle.txt" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
@@ -120,8 +125,15 @@
     <Content Include="Scripts\viewModel\PostPreviewModel.js" />
     <Content Include="Scripts\viewModel\PostModel.js" />
     <Content Include="Views\Default\about.cshtml" />
+    <Content Include="Views\Admin\list.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
+    <None Include="Views\Partials\post.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -133,6 +145,7 @@
     </Content>
     <Content Include="Views\Partials\Comment\commentForm.cshtml" />
     <Content Include="Views\Partials\Comment\comments.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Default\blog.cshtml" />
     <Content Include="Views\Partials\footer.cshtml" />
@@ -140,11 +153,13 @@
     <Content Include="Views\Partials\Side\search.cshtml" />
     <Content Include="Views\Partials\Side\category.cshtml" />
     <Content Include="Views\Partials\Side\popular.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Models\PostPreviewModel.cs" />
+    <Compile Include="Modules\AdminModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,9 +168,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery\jquery-2.0.3.min.map" />
   </ItemGroup>
   <ItemGroup>

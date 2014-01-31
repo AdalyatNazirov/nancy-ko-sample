@@ -17,6 +17,7 @@ namespace NancyWebBlog
             //maybe external scripts http://getcassette.net/documentation/v1/scripts/external
             AddStylesheetBundles(bundles);
             AddScriptBundles(bundles);
+
         }
 
         private static void AddStylesheetBundles(BundleCollection bundles)

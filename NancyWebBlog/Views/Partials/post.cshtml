@@ -1,0 +1,18 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
+
+<h1 class="titleCursor" data-bind="text: title"></h1>
+<p class="lead">
+    by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
+</p>
+<hr>
+<p>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+    </span>
+</p>
+<hr>
+<img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+<hr>
+<p data-bind="text: body">
+</p>
+@Html.Partial("Views/Partials/Comment/commentForm")
+@Html.Partial("Views/Partials/Comment/comments")
