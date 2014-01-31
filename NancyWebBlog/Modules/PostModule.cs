@@ -23,6 +23,8 @@ namespace NancyWebBlog.Modules
             Get["/all"] = SendAllPostPreviews;
 
             Get["/{id}"] = SendPostById;
+
+            Delete["/{id}"] = DeletePostById;
         }
 
         private Response SendAllPostPreviews(dynamic parameters)
@@ -44,6 +46,16 @@ namespace NancyWebBlog.Modules
                 var post = unitOfWork.PostRepository
                     .GetByID(id);
                 return JsonConvert.SerializeObject(post);
+            }
+        }
+
+        private Response DeletePostById(dynamic parameters)
+        {
+            using (var unitOfWork = new UnitOfWork())
+            {
+                int id = parameters.id;
+                //unitOfWork.PostRepository.Delete(id);
+                return "succeded";
             }
         }
     }

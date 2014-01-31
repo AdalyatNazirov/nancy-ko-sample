@@ -7,11 +7,11 @@
 @section Scripts{
     <script type="text/javascript">
         $(function () {
-            var viewModel = new PreviewsViewModel();
+            var viewModel = new AdminPreviewsViewModel();
             ko.applyBindings(viewModel);
         });
 
-        function PreviewsViewModel() {
+        function AdminPreviewsViewModel() {
             var self = this;
             var blogpath = window.location.pathname;
 
@@ -30,6 +30,16 @@
                     });
                 });
             }).run();
+
+            self.deletePost = function (post) {
+                $.ajax({
+                    url: '/post/'+post.id,
+                    type: 'DELETE',
+                    success: function (result) {
+                        self.posts.remove(post);
+                    }
+                });
+            }
         };
     </script>
 }
@@ -55,7 +65,7 @@
                 <td data-bind="text:preBody"></td>
                 <td>
                     <a href="#" ><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="#" ><i class="glyphicon glyphicon-remove"></i></a>
+                    <a href="#" data-bind="click: $root.deletePost"><i class="glyphicon glyphicon-remove"></i></a>
                 </td>
             </tr>
         </tbody>
