@@ -124,6 +124,7 @@
     <Content Include="Scripts\viewModel\CommentModel.js" />
     <Content Include="Scripts\viewModel\PostPreviewModel.js" />
     <Content Include="Scripts\viewModel\PostModel.js" />
+    <Content Include="Scripts\viewModel\TagModel.js" />
     <Content Include="Views\Default\about.cshtml" />
     <Content Include="Views\Admin\list.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

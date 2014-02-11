@@ -42,7 +42,7 @@
                     });
                 });
                 this.get(blogpath + '#/all', function () {
-                    this.app.runRoute('get', 'blog')
+                    this.app.runRoute('get', blogpath);
                 });
                 this.get(blogpath + '#/:postId', function () {
                     $.getJSON("/post/" + this.params.postId, function (data) {
