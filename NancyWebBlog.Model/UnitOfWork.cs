@@ -25,6 +25,20 @@ namespace NancyWebBlog.Repository
             }
         }
 
+        private Repository<Category> categoryRepository;
+
+        public Repository<Category> CategoryRepository
+        {
+            get
+            {
+                if (this.categoryRepository == null)
+                {
+                    this.categoryRepository = new Repository<Category>(context);
+                }
+                return categoryRepository;
+            }
+        }
+
         public void Save()
         {
             context.SaveChanges();

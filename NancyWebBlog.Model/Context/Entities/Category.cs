@@ -7,7 +7,7 @@ using System.Text;
 
 namespace NancyWebBlog.Model
 {
-    public class Tag
+    public class Category
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

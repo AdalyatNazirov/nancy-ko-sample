@@ -42,6 +42,13 @@ namespace NancyWebBlog.Model
             };
             context.Posts.Add(newPost);
             context.Comments.AddRange(newPost.Comments);
+
+            var newCategory = new Category()
+            {
+                Name = "C#"
+            };
+            context.Categories.Add(newCategory);
+
             context.SaveChanges();
         }
     }
