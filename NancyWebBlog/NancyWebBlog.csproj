@@ -161,6 +161,7 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Models\PostPreviewModel.cs" />
     <Compile Include="Modules\AdminModule.cs" />
+    <Compile Include="Modules\CategoryModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

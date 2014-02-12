@@ -54,7 +54,7 @@ namespace NancyWebBlog.Modules
             using (var unitOfWork = new UnitOfWork())
             {
                 int id = parameters.id;
-                //unitOfWork.PostRepository.Delete(id);
+                unitOfWork.PostRepository.Delete(id);
                 return "succeded";
             }
         }

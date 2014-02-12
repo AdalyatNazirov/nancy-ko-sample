@@ -27,6 +27,6 @@ namespace NancyWebBlog.Model
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public virtual ICollection<Category> Tags { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

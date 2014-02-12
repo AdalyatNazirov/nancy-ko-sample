@@ -24,9 +24,10 @@
             var blogpath = window.location.pathname;
 
             self.posts = ko.observableArray();
-            self.posts = ko.observableArray();
-            self.isListVisible = ko.observable();
+            self.categories = ko.observableArray();
             self.choosenPost = ko.observable();
+
+            self.isListVisible = ko.observable();
             self.goToPost = function (post) {
                 location.hash = "/" + post.id;
             }
@@ -53,6 +54,13 @@
                 });
             }).run();
 
+            $.getJSON("/category/all", function (response) {
+                var mapping = $.map(response, function (cat) {
+                    return new CategoryModel(cat);
+                });
+                self.categories(mapping);
+            });
+
             self.onPostRemoved = function (post) {
                 self.posts.remove(post);
             }
@@ -62,8 +70,7 @@
 
 <div class="col-lg-8">
     <div data-bind="foreach: posts, visible: isListVisible">
-        <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost">
-        </h1>
+        <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost"></h1>
         <p class="lead">
             by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
         </p>
