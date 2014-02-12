@@ -31,6 +31,9 @@
             self.goToPost = function (post) {
                 location.hash = "/" + post.id;
             }
+            self.goToCategory = function (category) {
+                location.hash = "/category/" + category.id;
+            }
 
             Sammy(function () {
                 this.get(blogpath, function () {
