@@ -55,6 +55,16 @@
                         self.isListVisible(false);
                     });
                 });
+                this.get(blogpath + '#/category/:categoryId', function () {
+                    $.getJSON("/post/category/" + this.params.categoryId, function (data) {
+                        var mapping = $.map(data, function (post) {
+                            return new PreviewPostModel(post);
+                        });
+                        self.posts(mapping)
+                        self.choosenPost(null);
+                        self.isListVisible(true);
+                    });
+                });
             }).run();
 
             $.getJSON("/category/all", function (response) {

@@ -10,6 +10,23 @@ namespace NancyWebBlog.Model
     {
         protected override void Seed(BlogContext context)
         {
+            var newCategory = new Category()
+            {
+                Name = "C#"
+            };
+            context.Categories.Add(newCategory);
+            newCategory = new Category()
+            {
+                Name = ".Net"
+            };
+            context.Categories.Add(newCategory);
+            newCategory = new Category()
+            {
+                Name = "Nancy"
+            };
+            context.Categories.Add(newCategory);
+            context.SaveChanges();
+
             Post newPost = new Post()
             {
                 Author = "Adel",
@@ -21,7 +38,8 @@ namespace NancyWebBlog.Model
                 Comments = new List<Comment>() { 
                     new Comment(){ Author="Andrew", PostedAt = DateTime.Now, Text="nice job"},
                     new Comment(){ Author="Rob", PostedAt = DateTime.Now, Text="very cool"},
-                }
+                },
+                Categories = context.Categories.ToList()
             };
             context.Posts.Add(newPost);
             context.Comments.AddRange(newPost.Comments);
@@ -38,16 +56,13 @@ namespace NancyWebBlog.Model
                     new Comment(){ Author = "Bob",
                                     PostedAt = DateTime.Now,
                                     Text = "good post"}
+                },
+                Categories = new List<Category>() { 
+                    context.Categories.FirstOrDefault()
                 }
             };
             context.Posts.Add(newPost);
             context.Comments.AddRange(newPost.Comments);
-
-            var newCategory = new Category()
-            {
-                Name = "C#"
-            };
-            context.Categories.Add(newCategory);
 
             context.SaveChanges();
         }

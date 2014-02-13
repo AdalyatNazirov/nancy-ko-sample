@@ -24,6 +24,8 @@ namespace NancyWebBlog.Modules
 
             Get["/{id}"] = SendPostById;
 
+            Get["/category/{categoryId}"] = SendPostOnCategories;
+
             Delete["/{id}"] = DeletePostById;
         }
 
@@ -48,6 +50,21 @@ namespace NancyWebBlog.Modules
                 return JsonConvert.SerializeObject(post);
             }
         }
+
+        private dynamic SendPostOnCategories(dynamic parameters)
+        {
+            using (var unitOfWork = new UnitOfWork())
+            {
+                int catId = parameters.categoryId;
+                var previews = unitOfWork.PostRepository
+                    .Get(filter: p=> p.Categories
+                                .Select(s=>s.ID).Contains(catId))
+                    .Select(post =>
+                        new PostPreviewModel(post));
+                return JsonConvert.SerializeObject(previews);
+            }
+        }
+
 
         private Response DeletePostById(dynamic parameters)
         {

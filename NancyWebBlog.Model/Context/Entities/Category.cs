@@ -15,6 +15,7 @@ namespace NancyWebBlog.Model
 
         public string Name { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Post> Posts { get; set; }
     }
 }
