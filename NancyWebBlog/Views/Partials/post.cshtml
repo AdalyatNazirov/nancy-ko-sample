@@ -1,8 +1,13 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
 
-<h1 class="titleCursor" data-bind="text: title"></h1>
+<h1 class="cursor-hand" data-bind="text: title"></h1>
 <p class="lead">
     by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
+</p>
+<p class="lead">
+    <ul data-bind="foreach: categories" class="list-inline">
+        <li><a data-bind="text: name, click:$root.goToCategory" class="cursor-hand">Name</a></li>
+    </ul>
 </p>
 <hr>
 <p>

@@ -27,7 +27,12 @@ namespace NancyWebBlog
 
         private static void AddScriptBundles(BundleCollection bundles)
         {
-            bundles.AddPerSubDirectory<ScriptBundle>("~/Scripts");
+            bundles.AddPerSubDirectory<ScriptBundle>("~/Scripts", new FileSearch
+            {
+                Pattern = "*.js",
+                Exclude = new Regex("\\.intellisense\\.js$")
+            });
+
         }
     }
 }

@@ -14,17 +14,13 @@ namespace NancyWebBlog.Modules
         public PostModule()
             : base("/post")
         {
-            Get["/"] = _ =>
-            {
-                UnitOfWork unitOfWork = new UnitOfWork();
-                return JsonConvert.SerializeObject(unitOfWork.PostRepository.Get().First());
-            };
+            Get["/"] = SendAllPostPreviews;
 
             Get["/all"] = SendAllPostPreviews;
 
             Get["/{id}"] = SendPostById;
 
-            Get["/category/{categoryId}"] = SendPostOnCategories;
+            Get["/category/{categoryId}"] = SendPostByCategories;
 
             Delete["/{id}"] = DeletePostById;
         }
@@ -51,7 +47,7 @@ namespace NancyWebBlog.Modules
             }
         }
 
-        private dynamic SendPostOnCategories(dynamic parameters)
+        private dynamic SendPostByCategories(dynamic parameters)
         {
             using (var unitOfWork = new UnitOfWork())
             {

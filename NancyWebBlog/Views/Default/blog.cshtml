@@ -73,17 +73,13 @@
                 });
                 self.categories(mapping);
             });
-
-            self.onPostRemoved = function (post) {
-                self.posts.remove(post);
-            }
         };
     </script>
 }
 
 <div class="col-lg-8">
     <div data-bind="foreach: posts, visible: isListVisible">
-        <h1 class="titleCursor" data-bind="text: title, click: $root.goToPost"></h1>
+        <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
         <p class="lead">
             by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
         </p>

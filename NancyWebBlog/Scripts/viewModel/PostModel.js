@@ -14,4 +14,10 @@
         return new CommentModel(comment);
     });
     self.comments(mapping);
+
+    self.categories = ko.observableArray();
+    var catMapping = $.map(data.Categories, function (category) {
+        return new CategoryModel(category);
+    });
+    self.categories(catMapping);
 }
