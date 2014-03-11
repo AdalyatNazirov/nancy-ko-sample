@@ -37,7 +37,7 @@
 
             Sammy(function () {
                 this.get(blogpath, function () {
-                    $.getJSON("/post/all", function (response) {
+                    $.getJSON("post/all", function (response) {
                         var mapping = $.map(response, function (post) {
                             return new PreviewPostModel(post);
                         });
@@ -50,13 +50,13 @@
                     this.app.runRoute('get', blogpath);
                 });
                 this.get(blogpath + '#/:postId', function () {
-                    $.getJSON("/post/" + this.params.postId, function (data) {
+                    $.getJSON("post/" + this.params.postId, function (data) {
                         self.choosenPost(new PostModel(data));
                         self.isListVisible(false);
                     });
                 });
                 this.get(blogpath + '#/category/:categoryId', function () {
-                    $.getJSON("/post/category/" + this.params.categoryId, function (data) {
+                    $.getJSON("post/category/" + this.params.categoryId, function (data) {
                         var mapping = $.map(data, function (post) {
                             return new PreviewPostModel(post);
                         });
@@ -67,7 +67,7 @@
                 });
             }).run();
 
-            $.getJSON("/category/all", function (response) {
+            $.getJSON("category/all", function (response) {
                 var mapping = $.map(response, function (cat) {
                     return new CategoryModel(cat);
                 });
@@ -81,7 +81,7 @@
     <div data-bind="foreach: posts, visible: isListVisible">
         <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
         <p class="lead">
-            by <a data-bind="text: author" href="@ResolveUrl("/about")">Author</a>
+            by <a data-bind="text: author" href="@ResolveUrl("~/about")">Author</a>
         </p>
         <hr>
         <p>
