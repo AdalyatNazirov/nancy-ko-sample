@@ -22,7 +22,7 @@
 
             Sammy(function () {
                 this.get(blogpath, function () {
-                    $.getJSON("/post/all", function (response) {
+                    $.getJSON("post/all", function (response) {
                         var mapping = $.map(response, function (post) {
                             return new PreviewPostModel(post);
                         });
@@ -33,7 +33,7 @@
 
             self.deletePost = function (post) {
                 $.ajax({
-                    url: '/post/'+post.id,
+                    url: 'post/' + post.id,
                     type: 'DELETE',
                     success: function (result) {
                         self.posts.remove(post);
@@ -45,7 +45,7 @@
 }
 
 <div>
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -64,12 +64,10 @@
                 <td data-bind="text:author"></td>
                 <td data-bind="text:preBody"></td>
                 <td>
-                    <a href="#" ><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="#" data-bind="click: $root.deletePost"><i class="glyphicon glyphicon-remove"></i></a>
+                    <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="#" data-bind="click: $root.deletePost"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
-

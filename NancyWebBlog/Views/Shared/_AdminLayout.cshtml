@@ -20,11 +20,9 @@
 </head>
 <body>
     @RenderSection("Scripts", required: false)
-    <a href="/">Go to main site</a>
+    <a href="~/"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Go to main site</a>
     <div>
-        <div class="row">
-            @RenderBody()
-        </div>
+        @RenderBody()
         <hr />
     </div>
 </body>

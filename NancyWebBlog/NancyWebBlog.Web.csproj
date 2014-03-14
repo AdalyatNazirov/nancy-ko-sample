@@ -130,7 +130,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery\jquery-2.1.0.min.map" />
     <None Include="Views\Default\index.cshtml" />
     <Content Include="TODO.txt" />
     <None Include="Views\Partials\post.cshtml" />

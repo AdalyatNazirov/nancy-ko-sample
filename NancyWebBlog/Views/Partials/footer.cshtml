@@ -1,8 +1,9 @@
-﻿<footer>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
+<footer>
     <div class="row">
         <div class="col-lg-12">
             <p>
-                Copyright &copy; Company 2014</p>
+                Copyright &copy; Company @System.DateTime.Now.Year</p>
         </div>
     </div>
 </footer>
