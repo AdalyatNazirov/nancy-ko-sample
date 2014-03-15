@@ -1,7 +1,8 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
 @using Cassette.Nancy
 @{
-    Bundles.Reference("Content");
+    Bundles.Reference("Content/css");
+    Bundles.Reference("Content/templates");
     
     Bundles.Reference("Scripts/bootstrap");
     Bundles.Reference("Scripts/jquery");
@@ -14,6 +15,7 @@
     @RenderSection("Header", required: false)
     @Bundles.RenderStylesheets()
     @Bundles.RenderScripts()
+    @Bundles.RenderHtmlTemplates()
 </head>
 <body>
     @RenderSection("Scripts", required: false)

@@ -1,0 +1,47 @@
+﻿<h1 class="cursor-hand" data-bind="text: title"></h1>
+<p class="lead">
+    by <a data-bind="text: author" href="~/about">Author</a>
+</p>
+<p class="lead">
+    <ul data-bind="foreach: categories" class="list-inline">
+        <li><a data-bind="text: name, click:$root.goToCategory" class="cursor-hand">Name</a></li>
+    </ul>
+</p>
+<hr>
+<p>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+    </span>
+</p>
+<hr>
+<img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+<hr>
+<p data-bind="text: body">
+</p>
+
+<!--comments-->
+<!-- ko foreach:comments -->
+<h3>
+    Start Bootstrap <small>9:47 PM on August 24, 2013</small>
+</h3>
+<p>
+    Don't listen to this guy, any blog with the categories 'dinosaurs, spaceships, fried
+    foods, wild animals, alien abductions, business casual, robots, and fireworks' has
+    true potential.
+</p>
+<!-- /ko -->
+
+<!--commentForm-->
+<div class="well">
+    <h4>
+        Leave a Comment:
+    </h4>
+    <form role="form">
+        <div class="form-group">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>
+<hr>

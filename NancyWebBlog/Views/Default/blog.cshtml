@@ -78,6 +78,7 @@
 }
 
 <div class="col-lg-8">
+    <!--START LIST MODE-->
     <div data-bind="foreach: posts, visible: isListVisible">
         <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
         <p class="lead">
@@ -94,9 +95,14 @@
         <p class="lead" data-bind="text: preBody">
         </p>
     </div>
-    <div data-bind="with: choosenPost">
-        @Html.Partial("Views/Partials/post")
+    <!--END LIST MODE-->
+
+    <!--START POST MODE-->
+    <!-- ko with:choosenPost -->
+    <div data-bind="template: { name: 'post-template', with: $data }">
     </div>
+    <!--/ko-->
+    <!--END POST MODE-->
 </div>
 <div class="col-lg-4">
     @Html.Partial("Views/Partials/Side/search")
