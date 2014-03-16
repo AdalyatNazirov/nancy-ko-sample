@@ -1,10 +1,28 @@
 ﻿/*    Comment box   */
-textarea.comment
-{
+textarea.comment {
     resize: vertical;
 }
 
-.cursor-hand
-{
+.cursor-hand {
     cursor: pointer;
+}
+
+.pager .previous a, .pager .next a {
+    width: 40%;
+}
+
+.pager .text-previous, .pager .text-next {
+    width:90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.pager .text-previous {
+    float:right;
+}
+.pager .text-next {
+    float:left;
 }
