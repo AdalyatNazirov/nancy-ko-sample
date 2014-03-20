@@ -29,7 +29,8 @@ namespace NancyWebBlog.Modules
         {
             using (var unitOfWork = new UnitOfWork())
             {
-                var previews = unitOfWork.PostRepository.Get()
+                var previews = unitOfWork.PostRepository
+                    .Get(orderBy: model => model.OrderBy(p => p.PostedAt))
                     .Select(post =>
                         new PostPreviewModel(post));
                 return JsonConvert.SerializeObject(previews);
@@ -37,7 +38,7 @@ namespace NancyWebBlog.Modules
         }
 
         private Response SendPostById(dynamic parameters)
-        {        
+        {
             using (var unitOfWork = new UnitOfWork())
             {
                 int id = parameters.id;
@@ -53,14 +54,14 @@ namespace NancyWebBlog.Modules
             {
                 int catId = parameters.categoryId;
                 var previews = unitOfWork.PostRepository
-                    .Get(filter: p=> p.Categories
-                                .Select(s=>s.ID).Contains(catId))
+                    .Get(filter: p => p.Categories
+                                .Select(s => s.ID).Contains(catId),
+                         orderBy: model => model.OrderBy(p => p.PostedAt))
                     .Select(post =>
                         new PostPreviewModel(post));
                 return JsonConvert.SerializeObject(previews);
             }
         }
-
 
         private Response DeletePostById(dynamic parameters)
         {

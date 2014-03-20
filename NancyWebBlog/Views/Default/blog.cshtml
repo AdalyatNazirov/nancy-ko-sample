@@ -22,12 +22,15 @@
         function PreviewsViewModel() {
             var self = this;
             var blogpath = window.location.pathname;
-
+            //general data
+            self.isListVisible = ko.observable();
             self.posts = ko.observableArray();
             self.categories = ko.observableArray();
+
+            //post data
             self.choosenPost = ko.observable();
 
-            self.isListVisible = ko.observable();
+            //user's event
             self.goToPost = function (post) {
                 location.hash = "/" + post.id;
             }
@@ -51,8 +54,10 @@
                 });
                 this.get(blogpath + '#/:postId', function () {
                     $.getJSON("post/" + this.params.postId, function (data) {
-                        self.choosenPost(new PostModel(data));
                         self.isListVisible(false);
+                        var model = new PostModel(data);
+                        model.neighbors = { prev: self.posts()[0], next: self.posts()[self.posts().length - 1] };
+                        self.choosenPost(model);
                     });
                 });
                 this.get(blogpath + '#/category/:categoryId', function () {

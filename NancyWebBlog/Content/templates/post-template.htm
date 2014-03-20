@@ -18,10 +18,10 @@
 <p data-bind="text: body">
 </p>
 
-<ul class="pager">
-    <li class="previous"><a href="#">&larr; <span class="text-previous">Previous Previous Previous Previous Previous Previous Previous Previous </span></a></li>
+<ul class="pager" data-bind="with : neighbors">
+    <li class="previous" data-bind="with: prev"><a href="#">&larr; <span class="text-previous" data-bind="text: title, click: $root.goToPost">Previous Previous Previous Previous Previous Previous Previous Previous</span></a></li>
     <li><a href="#">Blog Home</a></li>
-    <li class="next"><a href="#"><span class="text-next">Next Next Next Next Next Next Next Next Next Next Next Next Next</span> &rarr;</a></li>
+    <li class="next" data-bind="with: next"><a href="#"><span class="text-next" data-bind="text: title, click: $root.goToPost">Next Next Next Next Next Next Next Next Next Next Next Next Next</span> &rarr;</a></li>
 </ul>
 
 <!--comments-->
