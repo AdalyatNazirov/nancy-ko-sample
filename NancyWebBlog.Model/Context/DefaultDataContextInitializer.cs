@@ -33,7 +33,7 @@ namespace NancyWebBlog.Model
                 Title = "Post #1",
                 Body = "This is my first post!",
                 PreBody = "First post",
-                PostedAt = DateTime.Now,
+                PostedAt = DateTime.Now.AddDays(-2),
                 LogoUrl = "",
                 Comments = new List<Comment>() { 
                     new Comment(){ Author="Andrew", PostedAt = DateTime.Now, Text="nice job"},
@@ -50,12 +50,32 @@ namespace NancyWebBlog.Model
                 Title = "Post #2",
                 Body = "This is my second post!",
                 PreBody = "Second post",
-                PostedAt = DateTime.Now,
+                PostedAt = DateTime.Now.AddDays(-1),
                 LogoUrl = "",
                 Comments = new List<Comment>() { 
                     new Comment(){ Author = "Bob",
                                     PostedAt = DateTime.Now,
                                     Text = "good post"}
+                },
+                Categories = new List<Category>() { 
+                    context.Categories.FirstOrDefault()
+                }
+            };
+            context.Posts.Add(newPost);
+            context.Comments.AddRange(newPost.Comments);
+
+            newPost = new Post()
+            {
+                Author = "Adel",
+                Title = "Post #3",
+                Body = "This is my third post!",
+                PreBody = "Third post",
+                PostedAt = DateTime.Now,
+                LogoUrl = "",
+                Comments = new List<Comment>() { 
+                    new Comment(){ Author = "Jim",
+                                    PostedAt = DateTime.Now,
+                                    Text = "Nice job"}
                 },
                 Categories = new List<Category>() { 
                     context.Categories.FirstOrDefault()

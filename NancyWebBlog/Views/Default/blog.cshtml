@@ -55,8 +55,10 @@
                 this.get(blogpath + '#/:postId', function () {
                     $.getJSON("post/" + this.params.postId, function (data) {
                         self.isListVisible(false);
-                        var model = new PostModel(data);
-                        model.neighbors = { prev: self.posts()[0], next: self.posts()[self.posts().length - 1] };
+                        var model = new PostModel(data.post);
+                        model.neighbors = {};
+                        model.neighbors.prev = data.neighbors.prev == null ? null : new PreviewPostModel(data.neighbors.prev);
+                        model.neighbors.next = data.neighbors.next == null ? null : new PreviewPostModel(data.neighbors.next);
                         self.choosenPost(model);
                     });
                 });

@@ -20,7 +20,7 @@ namespace NancyWebBlog.Modules
 
             Get["/{id}"] = SendPostById;
 
-            Get["/category/{categoryId}"] = SendPostByCategories;
+            Get["/category/{categoryId}"] = SendPostPreviewsByCategories;
 
             Delete["/{id}"] = DeletePostById;
         }
@@ -44,11 +44,21 @@ namespace NancyWebBlog.Modules
                 int id = parameters.id;
                 var post = unitOfWork.PostRepository
                     .GetByID(id);
-                return JsonConvert.SerializeObject(post);
+                var nextPost = unitOfWork.PostRepository
+                    .Get(filter: p => p.PostedAt > post.PostedAt,
+                           orderBy: arr => arr.OrderBy(item => item.PostedAt))
+                    .FirstOrDefault();
+                var prevPost = unitOfWork.PostRepository
+                    .Get(filter: p => p.PostedAt < post.PostedAt,
+                           orderBy: arr => arr.OrderByDescending(item => item.PostedAt))
+                    .FirstOrDefault();
+                return JsonConvert.SerializeObject(new { post, 
+                    neighbors = new { prev = prevPost != null ? new PostPreviewModel(prevPost) : null,
+                                      next = nextPost != null ? new PostPreviewModel(nextPost) : null } });
             }
         }
 
-        private dynamic SendPostByCategories(dynamic parameters)
+        private dynamic SendPostPreviewsByCategories(dynamic parameters)
         {
             using (var unitOfWork = new UnitOfWork())
             {
