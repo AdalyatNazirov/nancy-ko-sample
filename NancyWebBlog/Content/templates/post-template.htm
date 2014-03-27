@@ -17,13 +17,21 @@
 <hr>
 <p data-bind="text: body">
 </p>
-
+<hr>
+<ul data-bind="foreach : related">
+    <li>
+        <a href="javascript:void(0);" data-bind="click: $root.goToPost">
+            <span class="text-previous" data-bind="text: title">Previous Previous Previous Previous Previous Previous Previous Previous</span>
+        </a>
+    </li>
+</ul>
+<hr>
 <ul class="pager" data-bind="with : neighbors">
     <li class="previous" data-bind="with: prev"><a href="javascript:void(0);" data-bind="click: $root.goToPost">&larr; <span class="text-previous" data-bind="text: title">Previous Previous Previous Previous Previous Previous Previous Previous</span></a></li>
     <li><a href="#">Blog Home</a></li>
     <li class="next" data-bind="with: next"><a href="javascript:void(0);" data-bind="click: $root.goToPost"><span class="text-next" data-bind="text: title, click: $root.goToPost">Next Next Next Next Next Next Next Next Next Next Next Next Next</span> &rarr;</a></li>
 </ul>
-
+<hr>
 <!--comments-->
 <!-- ko foreach:comments -->
 <h3>

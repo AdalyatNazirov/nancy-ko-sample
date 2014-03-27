@@ -52,9 +52,20 @@ namespace NancyWebBlog.Modules
                     .Get(filter: p => p.PostedAt < post.PostedAt,
                            orderBy: arr => arr.OrderByDescending(item => item.PostedAt))
                     .FirstOrDefault();
-                return JsonConvert.SerializeObject(new { post, 
-                    neighbors = new { prev = prevPost != null ? new PostPreviewModel(prevPost) : null,
-                                      next = nextPost != null ? new PostPreviewModel(nextPost) : null } });
+                var related = unitOfWork.PostRepository
+                    .Get()
+                    .Take(3)
+                    .Select(item => new PostPreviewModel(item));
+                return JsonConvert.SerializeObject(new
+                    {
+                        post,
+                        related,
+                        neighbors = new
+                        {
+                            prev = prevPost != null ? new PostPreviewModel(prevPost) : null,
+                            next = nextPost != null ? new PostPreviewModel(nextPost) : null
+                        }
+                    });
             }
         }
 
