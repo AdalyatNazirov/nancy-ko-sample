@@ -53,7 +53,8 @@ namespace NancyWebBlog.Modules
                            orderBy: arr => arr.OrderByDescending(item => item.PostedAt))
                     .FirstOrDefault();
                 var related = unitOfWork.PostRepository
-                    .Get()
+                    .Get(filter: item=> item.ID!=id)
+                    .OrderByDescending(item=>item.Categories.Intersect(post.Categories).Count())
                     .Take(3)
                     .Select(item => new PostPreviewModel(item));
                 return JsonConvert.SerializeObject(new
