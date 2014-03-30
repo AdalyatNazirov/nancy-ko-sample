@@ -35,3 +35,11 @@ textarea.comment {
 .pager .text-next {
     float: left;
 }
+
+.row label {
+    margin-bottom:0;
+}
+
+input + label {
+    padding-left:5px;
+}
