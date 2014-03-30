@@ -18,6 +18,11 @@ namespace NancyWebBlog.Repository
             this.dbSet = context.Set<TEntity>();
         }
 
+        public virtual int Count()
+        {
+            return this.dbSet.Count();
+        }
+
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

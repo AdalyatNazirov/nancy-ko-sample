@@ -17,6 +17,12 @@
         $(function () {
             var viewModel = new PreviewsViewModel();
             ko.applyBindings(viewModel);
+            $('#paging').pagination({
+                items: 100,
+                itemsOnPage: 10,
+                cssStyle: 'light-theme',
+                hrefTextPrefix: "#/page/"
+            });
         });
 
         function PreviewsViewModel() {
@@ -25,32 +31,35 @@
             //general data
             self.isListVisible = ko.observable();
             self.posts = ko.observableArray();
+
             self.categories = ko.observableArray();
+            self.selectedCategories = ko.observableArray();
+            self.selectedCategories.subscribe(function (updated) {
+                $('#paging').pagination('selectPage', 1);
+
+                if (location.hash !== '#/page/1') {
+                    location.hash = "/page/" + 1;
+                } else {
+                    updatePostList(1);
+                }
+            });
 
             //post data
             self.choosenPost = ko.observable();
-
             //user's event
             self.goToPost = function (post) {
                 location.hash = "/" + post.id;
             }
-            self.goToCategory = function (category) {
-                location.hash = "/category/" + category.id;
-            }
 
             Sammy(function () {
                 this.get(blogpath, function () {
-                    $.getJSON("post/all", function (response) {
-                        var mapping = $.map(response, function (post) {
-                            return new PreviewPostModel(post);
-                        });
-                        self.posts(mapping);
-                        self.isListVisible(true);
-                        self.choosenPost(null);
-                    });
+                    updatePostList(1);
                 });
                 this.get(blogpath + '#/all', function () {
                     this.app.runRoute('get', blogpath);
+                });
+                this.get(blogpath+'#/page/:page', function () {
+                    updatePostList(this.params.page);
                 });
                 this.get(blogpath + '#/:postId', function () {
                     $.getJSON("post/" + this.params.postId, function (data) {
@@ -63,16 +72,6 @@
                         self.choosenPost(model);
                     });
                 });
-                this.get(blogpath + '#/category/:categoryId', function () {
-                    $.getJSON("post/category/" + this.params.categoryId, function (data) {
-                        var mapping = $.map(data, function (post) {
-                            return new PreviewPostModel(post);
-                        });
-                        self.posts(mapping)
-                        self.choosenPost(null);
-                        self.isListVisible(true);
-                    });
-                });
             }).run();
 
             $.getJSON("category/all", function (response) {
@@ -81,27 +80,54 @@
                 });
                 self.categories(mapping);
             });
+
+            function updatePostList(page) {
+                var data = { categories: self.selectedCategories() };
+
+                $.ajax({
+                    type: "POST",
+                    url: "post/page/" + page,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    dataType: 'JSON',
+                    success: function (response) {
+                        var mapping = $.map(response.previews, function (post) {
+                            return new PreviewPostModel(post);
+                        });
+                        self.posts(mapping);
+                        self.isListVisible(true);
+                        self.choosenPost(null);
+                        $('#paging').pagination('updateItems', parseInt(response.count));
+                    }
+                });
+            }
         };
     </script>
 }
 
 <div class="col-lg-8">
     <!--START LIST MODE-->
-    <div data-bind="foreach: posts, visible: isListVisible">
-        <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
-        <p class="lead">
-            by <a data-bind="text: author" href="@ResolveUrl("~/about")">Author</a>
-        </p>
+    <div data-bind="visible: isListVisible">
+        <div data-bind="foreach: posts">
+            <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
+            <p class="lead">
+                by <a data-bind="text: author" href="@ResolveUrl("~/about")">Author</a>
+            </p>
+            <hr>
+            <p>
+                <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+                </span>
+            </p>
+            <hr>
+            <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+            <hr>
+            <p class="lead" data-bind="text: preBody">
+            </p>
+        </div>
         <hr>
-        <p>
-            <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
-            </span>
-        </p>
-        <hr>
-        <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
-        <hr>
-        <p class="lead" data-bind="text: preBody">
-        </p>
+        <div class="pagination-container">
+            <div id="paging" class="pagination"></div>
+        </div>
     </div>
     <!--END LIST MODE-->
 

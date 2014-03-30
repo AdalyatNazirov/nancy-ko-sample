@@ -106,6 +106,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\Bundle.txt" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\templates\post-template.htm" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap\bundle.txt" />
@@ -114,6 +115,7 @@
     <None Include="Scripts\jquery\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\jquery\jquery.simplePagination.js" />
     <Content Include="Scripts\knockout\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout\knockout-3.0.0.js" />
     <Content Include="Scripts\knockout\bundle.txt" />
@@ -158,6 +160,7 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Models\PostPreviewModel.cs" />
     <Compile Include="Modules\AdminModule.cs" />
+    <Compile Include="Models\CategoryIDs.cs" />
     <Compile Include="Modules\CategoryModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\PostModule.cs" />

@@ -7,12 +7,20 @@ textarea.comment {
     cursor: pointer;
 }
 
+.pagination-container {
+    text-align: center;
+}
+
+#paging.pagination {
+    display:inline-block;
+}
+
 .pager .previous a, .pager .next a {
     width: 40%;
 }
 
 .pager .text-previous, .pager .text-next {
-    width:90%;
+    width: 90%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-inline-box;
@@ -21,8 +29,9 @@ textarea.comment {
 }
 
 .pager .text-previous {
-    float:right;
+    float: right;
 }
+
 .pager .text-next {
-    float:left;
+    float: left;
 }

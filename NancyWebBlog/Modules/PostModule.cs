@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Nancy;
+﻿using Nancy;
+using Nancy.ModelBinding;
+using NancyWebBlog.Models;
 using NancyWebBlog.Repository;
 using Newtonsoft.Json;
-using NancyWebBlog.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NancyWebBlog.Modules
 {
@@ -14,26 +13,40 @@ namespace NancyWebBlog.Modules
         public PostModule()
             : base("/post")
         {
-            Get["/"] = SendAllPostPreviews;
+            Get["/"] = SendPostPreviews;
 
-            Get["/all"] = SendAllPostPreviews;
+            Post["/page/{page:int}/{itemsPerPage?10}"] = SendPostPreviews;
 
             Get["/{id}"] = SendPostById;
-
-            Get["/category/{categoryId}"] = SendPostPreviewsByCategories;
 
             Delete["/{id}"] = DeletePostById;
         }
 
-        private Response SendAllPostPreviews(dynamic parameters)
+        private Response SendPostPreviews(dynamic parameters)
         {
             using (var unitOfWork = new UnitOfWork())
             {
+                int page = parameters.page ?? 1;
+                int itemsPerPage = parameters.itemsPerPage ?? 10;
+                string[] categories = new string[0];
+                var modelIDs = this.Bind<CategoryIDs>();
+                if (modelIDs!=null && modelIDs.categories!=null)
+                {
+                    categories = modelIDs.categories.ToArray<string>();
+                }
+
                 var previews = unitOfWork.PostRepository
-                    .Get(orderBy: model => model.OrderBy(p => p.PostedAt))
+                    .Get( filter: item => categories.Count()==0 ||  item.Categories.Select(cat=>cat.Name).Intersect(categories).Count()!=0,
+                          orderBy: model => model.OrderBy(p => p.PostedAt))
                     .Select(post =>
                         new PostPreviewModel(post));
-                return JsonConvert.SerializeObject(previews);
+
+                int count = unitOfWork.PostRepository.Count();
+
+                return JsonConvert.SerializeObject(
+                    new { previews = previews.Skip((page-1)*itemsPerPage).Take(itemsPerPage), 
+                          count
+                    });
             }
         }
 
@@ -67,21 +80,6 @@ namespace NancyWebBlog.Modules
                             next = nextPost != null ? new PostPreviewModel(nextPost) : null
                         }
                     });
-            }
-        }
-
-        private dynamic SendPostPreviewsByCategories(dynamic parameters)
-        {
-            using (var unitOfWork = new UnitOfWork())
-            {
-                int catId = parameters.categoryId;
-                var previews = unitOfWork.PostRepository
-                    .Get(filter: p => p.Categories
-                                .Select(s => s.ID).Contains(catId),
-                         orderBy: model => model.OrderBy(p => p.PostedAt))
-                    .Select(post =>
-                        new PostPreviewModel(post));
-                return JsonConvert.SerializeObject(previews);
             }
         }
 
