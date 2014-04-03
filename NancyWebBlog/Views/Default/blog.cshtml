@@ -15,14 +15,14 @@
 @section Scripts{
     <script type="text/javascript">
         $(function () {
-            var viewModel = new PreviewsViewModel();
-            ko.applyBindings(viewModel);
             $('#paging').pagination({
-                items: 100,
+                items: 0,
                 itemsOnPage: 10,
                 cssStyle: 'light-theme',
                 hrefTextPrefix: "#/page/"
             });
+            var viewModel = new PreviewsViewModel();
+            ko.applyBindings(viewModel);
         });
 
         function PreviewsViewModel() {
@@ -108,21 +108,7 @@
 <div class="col-lg-8">
     <!--START LIST MODE-->
     <div data-bind="visible: isListVisible">
-        <div data-bind="foreach: posts">
-            <h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
-            <p class="lead">
-                by <a data-bind="text: author" href="@ResolveUrl("~/about")">Author</a>
-            </p>
-            <hr>
-            <p>
-                <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
-                </span>
-            </p>
-            <hr>
-            <img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
-            <hr>
-            <p class="lead" data-bind="text: preBody">
-            </p>
+        <div data-bind="template: { name: 'list-template', foreach: posts }">
         </div>
         <hr>
         <div class="pagination-container">

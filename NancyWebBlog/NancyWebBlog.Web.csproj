@@ -107,6 +107,7 @@
     <Content Include="Content\css\Bundle.txt" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\simplePagination.css" />
+    <Content Include="Content\templates\list-template.html" />
     <Content Include="Content\templates\post-template.htm" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap\bundle.txt" />

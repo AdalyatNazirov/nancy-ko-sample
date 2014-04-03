@@ -1,0 +1,14 @@
+﻿<h1 class="cursor-hand" data-bind="text: title, click: $root.goToPost"></h1>
+<p class="lead">
+    by <a data-bind="text: author" href="~/about">Author</a>
+</p>
+<hr>
+<p>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;Posted on&nbsp;<span data-bind="text: postedAt.toLocaleString()">
+    </span>
+</p>
+<hr>
+<img src="http://placehold.it/900x300" class="img-responsive" alt="Post Logo">
+<hr>
+<p class="lead" data-bind="text: preBody">
+</p>

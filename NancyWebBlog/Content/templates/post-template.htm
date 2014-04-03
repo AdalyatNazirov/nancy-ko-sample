@@ -35,9 +35,9 @@
 <!--comments-->
 <!-- ko foreach:comments -->
 <h3>
-    Start Bootstrap <small>9:47 PM on August 24, 2013</small>
+    <span data-bind="text:author">Start Bootstrap</span>  <small data-bind="text:postedAt.toLocaleString()">9:47 PM on August 24, 2013</small>
 </h3>
-<p>
+<p data-bind="text:text">
     Don't listen to this guy, any blog with the categories 'dinosaurs, spaceships, fried
     foods, wild animals, alien abductions, business casual, robots, and fireworks' has
     true potential.
