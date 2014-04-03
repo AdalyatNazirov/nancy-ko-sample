@@ -26,6 +26,8 @@ namespace NancyWebBlog.Repository
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            int skip = 0,
+            int take = 0,
             string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
@@ -40,15 +42,21 @@ namespace NancyWebBlog.Repository
             {
                 query = query.Include(includeProperty);
             }
-
+            IEnumerable<TEntity> listResult = null;
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                listResult = orderBy(query).ToList();
             }
             else
             {
-                return query.ToList();
+                listResult = query.ToList();
             }
+
+            listResult = listResult.Skip(skip);
+            if (take > 0)
+                return listResult.Take(take);
+            else
+                return listResult;
         }
 
         public virtual TEntity GetByID(object id)

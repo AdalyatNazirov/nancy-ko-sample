@@ -37,14 +37,16 @@ namespace NancyWebBlog.Modules
 
                 var previews = unitOfWork.PostRepository
                     .Get( filter: item => categories.Count()==0 ||  item.Categories.Select(cat=>cat.Name).Intersect(categories).Count()!=0,
-                          orderBy: model => model.OrderBy(p => p.PostedAt))
+                          orderBy: model => model.OrderBy(p => p.PostedAt),
+                          skip: (page - 1) * itemsPerPage,
+                          take: itemsPerPage)
                     .Select(post =>
                         new PostPreviewModel(post));
 
                 int count = unitOfWork.PostRepository.Count();
 
                 return JsonConvert.SerializeObject(
-                    new { previews = previews.Skip((page-1)*itemsPerPage).Take(itemsPerPage), 
+                    new { previews, 
                           count
                     });
             }
